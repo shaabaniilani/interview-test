@@ -1,11 +1,26 @@
 package com.travix.medusa.busyflights.domain.busyflights;
 
+import com.travix.medusa.busyflights.validator.DateFormat;
+
+import javax.validation.constraints.*;
+
 public class BusyFlightsRequest {
 
+    @NotNull
+    @Size(min = 3, max = 3, message = "Invalid 'origin' length.")
     private String origin;
+    @NotNull
+    @Size(min = 3, max = 3, message = "Invalid 'destination' length.")
     private String destination;
+    @NotNull
+    @DateFormat(message = "Invalid 'departureDate' format.")
     private String departureDate;
+    @NotNull
+    @DateFormat(message = "Invalid 'returnDate' format.")
     private String returnDate;
+    @NotNull
+    @Min(value = 1, message = "'numberOfPassengers' Can not be less that 1.")
+    @Max(value = 4, message = "'numberOfPassengers' Can not be more than 4.")
     private int numberOfPassengers;
 
     public String getOrigin() {
@@ -28,7 +43,7 @@ public class BusyFlightsRequest {
         return departureDate;
     }
 
-    public void setDepartureDate(final String departureDate) {
+    public void setDepartureDate(String departureDate) {
         this.departureDate = departureDate;
     }
 
@@ -36,7 +51,7 @@ public class BusyFlightsRequest {
         return returnDate;
     }
 
-    public void setReturnDate(final String returnDate) {
+    public void setReturnDate(String returnDate) {
         this.returnDate = returnDate;
     }
 
